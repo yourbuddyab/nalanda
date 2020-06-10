@@ -16,7 +16,7 @@ export default class Gallery extends Component {
     }
   } 
   componentDidMount(){
-    return fetch('http://appadmin.victoriousschool.in/api/gallery')
+    return fetch('http://schoolapp.jatinwardhan.com/api/gallery')
       .then((response) => response.json())
       .then((responseJson) => {
         // console.error(responseJson);

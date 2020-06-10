@@ -13,58 +13,58 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 const data = {
   labels: [
-    "Total",
-    "Unit Test 1",
-    "Unit Test 2",
-    "Unit Test 3",
-    "Halfyearly",
-    "Annual"
-  ],
+  "Total",
+  "Unit Test 1",
+  "Unit Test 2",
+  "Unit Test 3",
+  "Halfyearly",
+  "Annual"
+],
   datasets: [
     {
-      data: [100, 0, 0, 0, 0, 0]
+      data: [100,0,0,0,0,0]
     }
   ]
 }
 
 export default class Growth extends Component {
-  constructor(props) {
+  constructor(props){
     super(props);
-    this.state = {
+    this.state = { 
       isLoading: true,
       response: [],
     }
-  }
-  componentDidMount() {
-    return fetch('http://appadmin.victoriousschool.in/api/resultshow/' + this.props.route.params.id + ',' + this.props.route.params.class_id)
+  } 
+  componentDidMount(){
+    return fetch('http://schoolapp.jatinwardhan.com/api/resultshow/'+this.props.route.params.id+','+this.props.route.params.class_id)
       .then((response) => response.json())
       .then((responseJson) => {
-        data.labels = responseJson.testName ? responseJson.testName : data.labels,
-          data.datasets[0].data = responseJson.data ? responseJson.data : data.datasets[0].data,
-          this.setState({
-            isLoading: false,
-            response: responseJson,
-          }, function () {
+        data.labels = responseJson.testName,
+        data.datasets[0].data = responseJson.data,
+        this.setState({
+          isLoading: false,
+          response: responseJson,
+        }, function(){
 
-          });
+        });
       })
-      .catch((error) => {
+      .catch((error) =>{
         console.error(error);
       });
   }
   render() {
-    if (this.state.isLoading) {
-      return (
-        <View style={{ flex: 1, padding: 20 }}>
-          <ActivityIndicator />
+    if(this.state.isLoading){
+      return(
+        <View style={{flex: 1, padding: 20}}>
+          <ActivityIndicator/>
         </View>
       )
     }
-    return (
-      <View style={styles.container}>
-        <ScrollView>
-          <Text style={styles.powerBy}>Student Growth Chart</Text>
-          <LineChart
+  return (
+    <View style={styles.container}>
+      <ScrollView>
+            <Text style={styles.powerBy}>Student Growth Chart</Text>
+            <LineChart
             data={data}
             width={Dimensions.get("window").width} // from react-native
             height={Dimensions.get("window").height - 250}
@@ -74,28 +74,28 @@ export default class Growth extends Component {
             fromZero={true}
             withInnerLines={false}
             chartConfig={{
-              backgroundColor: "#004677",
-              backgroundGradientFrom: "#004677",
-              backgroundGradientTo: "#004677",
-              decimalPlaces: 0, // optional, defaults to 2dp
-              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-              labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-              style: {
-                borderRadius: 16
-              },
-              propsForDots: {
-                r: "6",
-                strokeWidth: "2",
-                stroke: "#ffa726"
-              }
+            backgroundColor: "#004677",
+            backgroundGradientFrom: "#004677",
+            backgroundGradientTo: "#004677",
+            decimalPlaces: 0, // optional, defaults to 2dp
+            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            style: {
+            borderRadius: 16
+            },
+            propsForDots: {
+            r: "6",
+            strokeWidth: "2",
+            stroke: "#ffa726"
+            }
             }}
             bezier
             style={{
-              borderRadius: 16
+            borderRadius: 16
             }}
-          />
-        </ScrollView>
-      </View>
+            />
+      </ScrollView>
+    </View>
     );
   }
 };
@@ -113,14 +113,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#004677',
     alignItems: 'center',
-    color: '#000',
+    color:'#000',
     justifyContent: 'flex-start',
-    paddingTop: 50
+    paddingTop:50
   },
-  powerBy: {
-    color: 'white',
-    fontSize: 24,
-    paddingBottom: 50,
-    textAlign: 'center'
-  }
+  powerBy:{
+    color:'white',
+    fontSize:24,
+    paddingBottom:50,
+    textAlign:'center'
+}
 });

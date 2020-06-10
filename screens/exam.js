@@ -17,8 +17,7 @@ export default class App extends Component {
     }
   } 
   componentDidMount(){
-    console.log(`http://appadmin.victoriousschool.in/api/timetable/${this.props.route.params.class_id}`)
-    return fetch('http://appadmin.victoriousschool.in/api/timetable/'+this.props.route.params.class_id)
+    return fetch('http://schoolapp.jatinwardhan.com/api/timetable/'+this.props.route.params.class_id)
       .then((response) => response.json())
       .then((responseJson) => {
         // console.error(responseJson);

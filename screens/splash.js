@@ -10,7 +10,7 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 
 /* Logo */
-import Logo from '../assets/splash.png';
+import Logo from '../assets/splash.jpg';
 import { StackActions } from '@react-navigation/native';
 
 
@@ -37,9 +37,8 @@ class LoadingScene extends Component {
         tension: 10,
         friction: 2,
         duration: 1000,
-        // useNativeDriver: true,
       }).start(),
-      
+
       Animated.timing(LogoText, {
         toValue: 1,
         duration: 1200,
@@ -52,7 +51,7 @@ class LoadingScene extends Component {
       setTimeout(this.switchToAuth, 1000);
     });
   }
-  
+
   render() {
     return (
       <View style={styles.container}>
@@ -68,14 +67,14 @@ class LoadingScene extends Component {
 
           {this.state.loadingSpinner ? (
             <ActivityIndicator
-            style={{
-              position: 'absolute',
-              left: 0,
-              right: 0,
-              top: 0,
-              bottom: 0,
-              alignItems: 'center',
-              justifyContent: 'center',
+              style={{
+                position: 'absolute',
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
               size="large"
               color="#5257f2"

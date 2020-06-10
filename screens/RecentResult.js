@@ -11,7 +11,7 @@ export default class RecentResult extends Component {
         }
       }
       componentDidMount(){
-        return fetch('http://appadmin.victoriousschool.in/api/recentresult/1')
+        return fetch('http://schoolapp.jatinwardhan.com/api/recentresult/1')
           .then((response) => response.json())
           .then((responseJson) => {
             this.setState({
@@ -19,7 +19,7 @@ export default class RecentResult extends Component {
               response:responseJson,
             }, function(){}
           );
-          // console.error(responseJson);
+          console.error(responseJson);
           })
           .catch((error) =>{
             console.error(error);
@@ -44,7 +44,7 @@ export default class RecentResult extends Component {
                       
                       <View style={{paddingVertical:"5%",paddingHorizontal:-5, flexDirection:'row', justifyContent:'space-between'}}>
                         <Text style={{fontWeight:'bold',fontSize:18}}>{item.testName}</Text>
-                        <Text style={{borderRadius:4,marginTop:'-1%',backgroundColor:'#c3c3c3',height:'100%',width:'20%',textAlign:'center',textAlignVertical:'center'}}>{item.result == 'P' ? (<Text style={{color:'#00ab66',fontWeight:'bold'}}>Pass</Text>) : (<Text style={{color:'red',fontWeight:'bold'}}>Fail</Text>)}</Text>
+                        <Text style={{borderRadius:4,marginTop:'-1%',backgroundColor:'#c3c3c3',height:'65%',width:'20%',textAlign:'center',textAlignVertical:'center'}}>{item.result == 'P' ? (<Text style={{color:'#00ab66',fontWeight:'bold'}}>Pass</Text>) : (<Text style={{color:'red',fontWeight:'bold'}}>Fail</Text>)}</Text>
                       </View>
                     </View>
                   </Card>

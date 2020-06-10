@@ -4,11 +4,28 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ScrollView,
-  Image
+  Image,
+  FlatList,
+  SafeAreaView,
+  Dimensions
 } from 'react-native';
 import { Icon, Button } from 'native-base';
 import AsyncStorage from '@react-native-community/async-storage';
+
+const data = [
+  { id: '1', imagePath: require('../assets/icon/ic_menu_02.jpg'), screenName: 'Attendance' },
+  { id: '2', imagePath: require('../assets/icon/ic_menu_09.jpg'), screenName: 'Diary' },
+  { id: '3', imagePath: require('../assets/icon/ic_menu_10.jpg'), screenName: 'Notice' },
+  { id: '4', imagePath: require('../assets/icon/ic_menu_04.jpg'), screenName: 'Result' },
+  { id: '5', imagePath: require('../assets/icon/ic_menu_06.jpg'), screenName: 'Growth' },
+  { id: '6', imagePath: require('../assets/icon/ic_menu_03.jpg'), screenName: 'Exam' },
+  { id: '7', imagePath: require('../assets/icon/ic_menu_07.jpg'), screenName: 'Holiday' },
+  { id: '8', imagePath: require('../assets/icon/ic_menu_01.jpg'), screenName: 'Fees' },
+  { id: '9', imagePath: require('../assets/icon/ic_menu_08.jpg'), screenName: 'Downloads' },
+  { id: '10', imagePath: require('../assets/icon/ic_menu_11.jpg'), screenName: 'Lecture' },
+];
+
+
 
 export default class Home extends Component {
   constructor(props) {
@@ -42,78 +59,35 @@ export default class Home extends Component {
 
   render() {
     const { navigation } = this.props
-    const { username, id, class_id, name, } = this.state
-    const { container, menu, menuBtn, row, col, footer, icon, center, } = styles
+    const { username, name, id, class_id } = this.state
+    const { container, title, menu, menuBtn, footer, icon, } = styles
+    const Menu = ({ imagePath, screenName }) => {
+      return (
+        <TouchableOpacity style={menuBtn} onPress={() => navigation.navigate(screenName, {
+          username, id, class_id
+        })}>
+          <Image style={{ paddingHorizontal: '5%', width:75, height:75}} source={imagePath} />
+        </TouchableOpacity>
+      );
+    }
     return (
       <View style={container}>
-        <View style={menu}>
-          <Text
-            style={{
-              fontSize: 20,
-              marginBottom: "8%",
-              fontWeight: 'bold',
-              paddingBottom: '2%',
-              borderBottomWidth: 2,
-              borderColor: '#d6d7da',
-            }}>{name}</Text>
-          <ScrollView>
-
-            <View style={row}>
-              <View style={col}>
-                <TouchableOpacity onPress={() => navigation.navigate('Attendance', {
-                  id: id,
-                })} style={menuBtn}>
-                  <Image style={{ paddingHorizontal: '5%' }} source={require('../assets/icon/ic_menu_02.png')} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Diary', {
-                  id: id,
-                })} style={menuBtn}>
-                  <Image style={{ paddingHorizontal: '5%' }} source={require('../assets/icon/ic_menu_09.png')} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Notice')} style={menuBtn}>
-                  <Image style={{ paddingHorizontal: '5%' }} source={require('../assets/icon/ic_menu_10.png')} />
-                </TouchableOpacity>
-              </View>
-              <View style={col}>
-                <TouchableOpacity onPress={() => navigation.navigate('Result', {
-                  id: id,
-                })} style={menuBtn}>
-                  <Image style={{ paddingHorizontal: '5%' }} source={require('../assets/icon/ic_menu_04.png')} />
-                </TouchableOpacity>
-                <TouchableOpacity style={menuBtn} onPress={() => navigation.navigate('Fees', {
-                  id: id,
-                })}>
-                  <Image style={{ paddingHorizontal: '5%' }} source={require('../assets/icon/ic_menu_06.png')} />
-                </TouchableOpacity>
-                <TouchableOpacity style={menuBtn} onPress={() => navigation.navigate('Exam', {
-                  class_id: class_id
-                })}>
-                  <Image style={{ paddingHorizontal: '5%' }} source={require('../assets/icon/ic_menu_03.png')} />
-                </TouchableOpacity>
-              </View>
-              <View style={col}>
-                <TouchableOpacity onPress={() => navigation.navigate('Holiday')} style={menuBtn}>
-                  <Image style={{ paddingHorizontal: '5%' }} source={require('../assets/icon/ic_menu_07.png')} />
-                </TouchableOpacity>
-                <TouchableOpacity style={menuBtn} onPress={() => navigation.navigate('Fees', {
-                  id: id,
-                })} transparent>
-                  <Image style={{ paddingHorizontal: '5%' }} source={require('../assets/icon/ic_menu_01.png')} />
-                </TouchableOpacity>
-                <TouchableOpacity style={menuBtn} onPress={() => navigation.navigate('Downloads')} transparent>
-                  <Image style={{ paddingHorizontal: '5%' }} source={require('../assets/icon/ic_menu_08.png')} />
-                </TouchableOpacity>
-              </View>
-            </View>
-          </ScrollView>
-        </View>
+        <Text style={title}>{name}</Text>
+        <SafeAreaView style={menu}>
+          <FlatList
+            data={data}
+            renderItem={({ item }) =>
+              <Menu screenName={item.screenName} imagePath={item.imagePath} />}
+            keyExtractor={item => item.id}
+            numColumns={3}
+            contentContainerStyle={{ alignItems: 'center' }}
+          />
+        </SafeAreaView>
         <View style={footer}>
           <Button onPress={() => navigation.navigate('Home')} transparent>
             <Icon name='home' style={icon} />
           </Button>
-          <Button onPress={() => navigation.navigate('Setting', {
-            username: username,
-          })} transparent>
+          <Button onPress={() => navigation.navigate('Setting', { username })} transparent>
             <Icon name='person' style={icon} />
           </Button>
         </View>
@@ -131,7 +105,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     paddingTop: '10%'
   },
-  //Menu CSS
   menu: {
     flex: 1,
     alignItems: 'center',
@@ -148,11 +121,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  // Footer Css
+  title: {
+    fontSize: 20,
+    marginBottom: "8%",
+    fontWeight: 'bold',
+    paddingBottom: '2%',
+    borderBottomWidth: 2,
+    borderColor: '#d6d7da',
+  },
   footer: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#475670',
+    backgroundColor: '#51b7bb',
     padding: 5,
     paddingHorizontal: 80,
     position: "absolute",

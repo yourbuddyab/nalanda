@@ -18,7 +18,7 @@ export default class App extends Component {
   }
 }  
 componentDidMount(){
-  return fetch('http://appadmin.victoriousschool.in/api/result/'+this.props.route.params.id)
+  return fetch('http://schoolapp.jatinwardhan.com/api/result/'+this.props.route.params.id)
     .then((response) => response.json())
     .then((responseJson) => {
       this.setState({
@@ -49,7 +49,7 @@ render() {
         <ScrollView>
         <TableView>
           <Section header="Result" headerTextStyle={{fontSize:20, marginBottom:10}} footerTextStyle={{fontSize:20, marginTop:5}} footerTextColor='#fff'
-           headerTextColor='#fff' footer="Final Result" sectionTintColor='#475670'>
+           headerTextColor='#fff' footer="Final Result" sectionTintColor='#51b7bb'>
             <Cell cellStyle="RightDetail" title="Student Name" detail={this.state.response.studentName}/>
             <Cell cellStyle="RightDetail" title="Father Name" detail={this.state.response.fName}/>
             <Cell cellStyle="RightDetail" title="Mother Name" detail={this.state.response.mName}/>

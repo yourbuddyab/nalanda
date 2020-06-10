@@ -13,7 +13,7 @@ export default class Downloads extends Component {
       }
       async componentDidMount(){
         try {
-          const response = await fetch('http://appadmin.victoriousschool.in/api/downloads');
+          const response = await fetch('http://schoolapp.jatinwardhan.com/api/downloads');
           const responseJson = await response.json();
           this.setState({
             isLoading: false,

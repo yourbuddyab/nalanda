@@ -35,7 +35,7 @@ export default class Growth extends Component {
     }
   } 
   componentDidMount(){
-    return fetch('http://appadmin.victoriousschool.in/api/resultshow/'+this.props.route.params.id+','+this.props.route.params.class_id)
+    return fetch('http://schoolapp.jatinwardhan.com/api/resultshow/'+this.props.route.params.id+','+this.props.route.params.class_id)
       .then((response) => response.json())
       .then((responseJson) => {
         data.labels = responseJson.testName,
@@ -72,9 +72,9 @@ export default class Growth extends Component {
     fromZero={true}
     withInnerLines={false}
     chartConfig={{
-      backgroundColor: "#004677",
-      backgroundGradientFrom: "#004677",
-      backgroundGradientTo: "#004677",
+      backgroundColor: "#f99325",
+      backgroundGradientFrom: "#f99325",
+      backgroundGradientTo: "#f99325",
       decimalPlaces: 0, // optional, defaults to 2dp
       color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
       labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,

@@ -22,7 +22,7 @@ export default class Login extends Component{
     submit = async()=> {
         const{currentpassword,password,confirmpassword} =this.state;
         const username = this.props.route.params.username;
-        fetch('http://appadmin.victoriousschool.in/api/student/reset',{
+        fetch('http://schoolapp.jatinwardhan.com/api/student/reset',{
         method:'POST',
         headers:{
         Accept : 'application/json',
@@ -71,7 +71,7 @@ export default class Login extends Component{
 }
 const styles = StyleSheet.create({
     container:{
-        backgroundColor:'#637791',
+        backgroundColor:'#004677',
         width:'100%',
         height:'100%',
         alignItems:'center',
